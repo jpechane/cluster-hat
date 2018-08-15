@@ -1,0 +1,32 @@
+version: 0.1
+log:
+  level: debug
+  fields:
+    service: registry
+    environment: cluster-hat
+storage:
+    cache:
+        blobdescriptor: redis
+    filesystem:
+        rootdirectory: /var/lib/registry-cache
+    maintenance:
+        uploadpurging:
+            enabled: false
+http:
+    addr: :5000
+redis:
+  addr: localhost:6379
+  pool:
+    maxidle: 16
+    maxactive: 64
+    idletimeout: 300s
+  dialtimeout: 10ms
+  readtimeout: 10ms
+  writetimeout: 10ms
+proxy:
+  remoteurl: https://registry-1.docker.io
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
